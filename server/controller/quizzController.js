@@ -1,16 +1,28 @@
 import {
-  getAthletesSQL,
-  getAthleteSQLById,
-  deleteAthleteSQLById,
-  createAthleteSQL,
-  updateAthleteSQLById,
-  deletTitreyAthelete
-} from "../utils/athlete.js";
+  getQuizzSQL,
+  getQuizzSQLByCat,
+  // getAthleteSQLById,
+  // deleteAthleteSQLById,
+  // createAthleteSQL,
+  // updateAthleteSQLById,
+  // deletTitreyAthelete,
+} from "../utils/quizz.js";
 
 // GET ALL ATHLETES
 
-export const getAthletes = async (req, res) => {
-  const athletes = await getAthletesSQL();
+export const getQuizz = async (req, res) => {
+  const athletes = await getQuizzSQL();
+  res.json(athletes);
+};
+
+export const getQuizzByCat = async (req, res) => {
+  const { quizzType, quizzProgression } = req.body;
+
+  console.log("quizzType", quizzType);
+  console.log("quizzProgression", quizzProgression);
+
+  const athletes = await getQuizzSQLByCat(quizzType, quizzProgression);
+
   res.json(athletes);
 };
 
@@ -31,7 +43,7 @@ export const getAthleteById = async (req, res) => {
 export const deleteAthleteById = async (req, res) => {
   const { id } = req.params;
   console.log("id", id);
-  await deletTitreyAthelete(id)
+  await deletTitreyAthelete(id);
   await deleteAthleteSQLById(Number(id));
   res.json({ message: `Athlete Deleted ${id}` });
 };
