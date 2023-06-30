@@ -2,35 +2,49 @@ DROP DATABASE IF EXISTS asteriaQuizz;
 
 CREATE DATABASE asteriaQuizz CHARACTER
 SET
-    utf8mb4 COLLATE utf8mb4_unicode_ci;
+    utf8 COLLATE utf8_general_ci;
 
 USE asteriaQuizz;
 
 CREATE TABLE
     Quizz (
         id INT PRIMARY KEY AUTO_INCREMENT,
-        quizz_name VARCHAR(255)
+        quizz_name VARCHAR(255) CHARACTER
+        SET
+            utf8 COLLATE utf8_general_ci
     );
 
 CREATE TABLE
     Question (
         id INT PRIMARY KEY AUTO_INCREMENT,
         quizz_id INT,
-        question_value VARCHAR(255),
-        photo_question VARCHAR(255),
-        photo_answer VARCHAR(255),
-        answer_name VARCHAR(255),
-        answer_explanation TEXT,
-        FOREIGN KEY (quizz_id) REFERENCES Quizz (id)
+        question_value VARCHAR(255) CHARACTER
+        SET
+            utf8 COLLATE utf8_general_ci,
+            photo_question VARCHAR(255) CHARACTER
+        SET
+            utf8 COLLATE utf8_general_ci,
+            photo_answer VARCHAR(255) CHARACTER
+        SET
+            utf8 COLLATE utf8_general_ci,
+            answer_name VARCHAR(255) CHARACTER
+        SET
+            utf8 COLLATE utf8_general_ci,
+            answer_explanation TEXT CHARACTER
+        SET
+            utf8 COLLATE utf8_general_ci,
+            FOREIGN KEY (quizz_id) REFERENCES Quizz (id)
     );
 
 CREATE TABLE
     QuizOption (
         id INT PRIMARY KEY AUTO_INCREMENT,
         question_id INT,
-        question_answer VARCHAR(255),
-        is_correct BOOLEAN,
-        FOREIGN KEY (question_id) REFERENCES Question (id)
+        question_answer VARCHAR(255) CHARACTER
+        SET
+            utf8 COLLATE utf8_general_ci,
+            is_correct BOOLEAN,
+            FOREIGN KEY (question_id) REFERENCES Question (id)
     );
 
 -- Pour le quizz "quizzSystemeSolaire01"
